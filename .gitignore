@@ -1,0 +1,14 @@
+# Gradle
+.gradle/
+build/
+
+# IntelliJ IDEA
+.idea/
+*.iml
+out/
+
+# OS / misc
+.DS_Store
+
+# Local game save data (lives in the user's home directory at runtime)
+/data/

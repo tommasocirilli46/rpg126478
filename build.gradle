@@ -1,0 +1,48 @@
+plugins {
+    // Builds a runnable JVM application and provides the `run` task.
+    id 'application'
+    // Manages JavaFX modules and the platform-specific native libraries automatically.
+    id 'org.openjfx.javafxplugin' version '0.1.0'
+}
+
+group = 'it.rpg'
+version = '1.0.0'
+
+repositories {
+    mavenCentral()
+}
+
+// A Java toolchain makes the build reproducible on any machine.
+// If a JDK 21 is not installed, Gradle can auto-provision one
+// (see the foojay resolver plugin configured in settings.gradle).
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(25)
+    }
+}
+
+javafx {
+    version = '25'
+    // Only the controls module is needed; it transitively pulls base + graphics.
+    modules = ['javafx.controls']
+}
+
+dependencies {
+    // JSON serialization for the local Repository implementations.
+    implementation 'com.google.code.gson:gson:2.11.0'
+
+    // Testing.
+    testImplementation platform('org.junit:junit-bom:5.10.2')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+application {
+    // A plain launcher (NOT the Application subclass) so the app starts
+    // correctly from the classpath without a module-info descriptor.
+    mainClass = 'it.rpg.Main'
+}
+
+test {
+    useJUnitPlatform()
+}
