@@ -1,0 +1,176 @@
+{
+  "id": "la-cripta",
+  "title": "La Cripta Dimenticata",
+  "description": "Esplora una cripta sigillata da secoli alla ricerca del suo tesoro perduto. Sopravviverai al suo guardiano?",
+  "startSceneId": "ingresso",
+  "start": {
+    "health": 25,
+    "attributes": { "coraggio": 3, "intelligenza": 2 },
+    "items": [
+      { "id": "torcia", "name": "Torcia", "description": "Una torcia di pino che brucia debolmente." }
+    ]
+  },
+  "leveling": {
+    "xpPerLevel": 100,
+    "attributeBonus": { "coraggio": 1, "intelligenza": 1 },
+    "maxLevel": 5
+  },
+  "npcs": [
+    {
+      "id": "guardiano",
+      "name": "Guardiano della cripta",
+      "description": "Una figura scheletrica avvolta in un mantello in brandelli, animata da un'antica maledizione.",
+      "maxHealth": 12,
+      "attack": 5
+    }
+  ],
+  "scenes": [
+    {
+      "id": "ingresso",
+      "title": "L'ingresso della cripta",
+      "text": "Una pesante lastra di pietra si è spostata, rivelando l'ingresso della cripta dimenticata. L'aria sa di muffa e di tempo. Alla luce tremolante della tua torcia, vedi un altare di pietra alla tua destra e un corridoio che sprofonda nel buio davanti a te.",
+      "choices": [
+        {
+          "text": "Esamina l'altare di pietra",
+          "target": "altare"
+        },
+        {
+          "text": "Avanza lungo il corridoio buio",
+          "target": "corridoio"
+        }
+      ]
+    },
+    {
+      "id": "altare",
+      "title": "L'altare di pietra",
+      "text": "Sull'altare, coperta di polvere, riposa una chiave di ferro arrugginita. Incisioni consunte raccontano di un guardiano posto a difesa del tesoro. Studiando a lungo i simboli, molti segreti della cripta ti diventano chiari.",
+      "choices": [
+        {
+          "text": "Prendi la chiave e torna nel corridoio",
+          "target": "corridoio",
+          "effects": [
+            { "type": "ADD_ITEM", "item": { "id": "chiave_arrugginita", "name": "Chiave arrugginita", "description": "Una vecchia chiave di ferro." } },
+            { "type": "MODIFY_ATTRIBUTE", "attribute": "intelligenza", "amount": 1 },
+            { "type": "GAIN_XP", "amount": 60 }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "corridoio",
+      "title": "Il corridoio buio",
+      "text": "Il corridoio si apre in un piccolo crocevia. A nord, una porta di ferro sbarra il passaggio. A lato, il pavimento è crollato in una fossa fangosa e scivolosa.",
+      "choices": [
+        {
+          "text": "Apri la porta di ferro a nord",
+          "target": "guardiano",
+          "requirements": [
+            { "type": "HAS_ITEM", "itemId": "chiave_arrugginita", "label": "Chiave arrugginita" }
+          ]
+        },
+        {
+          "text": "Cala nella fossa per cercare un'altra via",
+          "target": "fossa",
+          "effects": [
+            { "type": "MODIFY_HEALTH", "amount": -10 }
+          ]
+        },
+        {
+          "text": "Torna verso l'ingresso",
+          "target": "ingresso"
+        }
+      ]
+    },
+    {
+      "id": "fossa",
+      "title": "In fondo alla fossa",
+      "text": "Atterri con un tonfo nel fango. Tra ossa e detriti luccica qualcosa: un antico amuleto inciso con lo stesso simbolo dell'altare. L'unica via d'uscita è risalire la parete scivolosa.",
+      "choices": [
+        {
+          "text": "Raccogli l'amuleto e risali",
+          "target": "corridoio",
+          "effects": [
+            { "type": "ADD_ITEM", "item": { "id": "amuleto", "name": "Amuleto del guardiano", "description": "Un amuleto inciso con antichi simboli." } },
+            { "type": "MODIFY_HEALTH", "amount": -5 },
+            { "type": "GAIN_XP", "amount": 50 }
+          ]
+        },
+        {
+          "text": "Risali subito, senza perdere tempo",
+          "target": "corridoio",
+          "effects": [
+            { "type": "MODIFY_HEALTH", "amount": -5 }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "guardiano",
+      "title": "Il guardiano della cripta",
+      "text": "Oltre la porta, una figura scheletrica avvolta in un mantello in brandelli si erge a guardia di un sarcofago dorato. Vuote orbite si accendono di una luce fredda mentre ti fissa.",
+      "choices": [
+        {
+          "text": "Mostra l'amuleto del guardiano",
+          "target": "vittoria_pacifica",
+          "requirements": [
+            { "type": "HAS_ITEM", "itemId": "amuleto", "label": "Amuleto del guardiano" }
+          ]
+        },
+        {
+          "text": "Sfrutta l'esperienza accumulata per spezzare il sigillo che lo anima",
+          "target": "camera_tesoro",
+          "requirements": [
+            { "type": "MIN_LEVEL", "value": 2 }
+          ]
+        },
+        {
+          "text": "Affrontalo in combattimento",
+          "target": "scontro_guardiano"
+        },
+        {
+          "text": "Tenta di placarlo con le parole degli antichi",
+          "target": "camera_tesoro",
+          "requirements": [
+            { "type": "MIN_ATTRIBUTE", "attribute": "intelligenza", "value": 3 }
+          ]
+        },
+        {
+          "text": "Fuggi nel corridoio",
+          "target": "corridoio",
+          "effects": [
+            { "type": "MODIFY_HEALTH", "amount": -5 }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "scontro_guardiano",
+      "title": "Lo scontro col guardiano",
+      "text": "Il guardiano leva un'arma spettrale e ti viene incontro. Non c'è più tempo per le parole: stringi i denti e ti prepari a combattere per la tua vita.",
+      "encounter": {
+        "npcId": "guardiano",
+        "victorySceneId": "camera_tesoro",
+        "fleeSceneId": "corridoio",
+        "xpReward": 100,
+        "playerAttackAttribute": "coraggio"
+      },
+      "choices": []
+    },
+    {
+      "id": "camera_tesoro",
+      "title": "La camera del tesoro",
+      "text": "Il guardiano si sgretola in polvere. Sollevi il coperchio del sarcofago: monete d'oro, gemme e una corona dimenticata brillano alla luce della torcia. Esci dalla cripta da ricco eroe. Hai vinto!",
+      "outcome": "VICTORY",
+      "ending": true,
+      "choices": []
+    },
+    {
+      "id": "vittoria_pacifica",
+      "title": "Il patto dell'amuleto",
+      "text": "Alla vista dell'amuleto il guardiano si inchina e si fa da parte. Senza versare una goccia di sangue, reclami il tesoro e l'antica benedizione dei suoi custodi. Hai vinto con saggezza!",
+      "outcome": "VICTORY",
+      "ending": true,
+      "choices": []
+    }
+  ]
+}
