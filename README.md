@@ -64,6 +64,5 @@ I salvataggi sono file JSON nella cartella personale dell'utente:
 
 ## Dichiarazione sull'uso dell'IA
 
-Vedi il file [`docs/wiki/06-Dichiarazione-uso-IA.md`](docs/wiki/06-Dichiarazione-uso-IA.md)
-per la dichiarazione dettagliata sull'utilizzo di strumenti di intelligenza artificiale
+Vedi la wiki per la dichiarazione dettagliata sull'utilizzo di strumenti di intelligenza artificiale
 durante lo sviluppo del progetto.
