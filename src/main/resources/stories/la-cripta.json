@@ -28,6 +28,7 @@
     {
       "id": "ingresso",
       "title": "L'ingresso della cripta",
+      "image": "ingresso.png",
       "text": "Una pesante lastra di pietra si è spostata, rivelando l'ingresso della cripta dimenticata. L'aria sa di muffa e di tempo. Alla luce tremolante della tua torcia, vedi un altare di pietra alla tua destra e un corridoio che sprofonda nel buio davanti a te.",
       "choices": [
         {
@@ -43,6 +44,7 @@
     {
       "id": "altare",
       "title": "L'altare di pietra",
+      "image": "altare.png",
       "text": "Sull'altare, coperta di polvere, riposa una chiave di ferro arrugginita. Incisioni consunte raccontano di un guardiano posto a difesa del tesoro. Studiando a lungo i simboli, molti segreti della cripta ti diventano chiari.",
       "choices": [
         {
@@ -59,6 +61,7 @@
     {
       "id": "corridoio",
       "title": "Il corridoio buio",
+      "image": "corridoio.png",
       "text": "Il corridoio si apre in un piccolo crocevia. A nord, una porta di ferro sbarra il passaggio. A lato, il pavimento è crollato in una fossa fangosa e scivolosa.",
       "choices": [
         {
@@ -84,6 +87,7 @@
     {
       "id": "fossa",
       "title": "In fondo alla fossa",
+      "image": "fossa.png",
       "text": "Atterri con un tonfo nel fango. Tra ossa e detriti luccica qualcosa: un antico amuleto inciso con lo stesso simbolo dell'altare. L'unica via d'uscita è risalire la parete scivolosa.",
       "choices": [
         {
@@ -107,6 +111,7 @@
     {
       "id": "guardiano",
       "title": "Il guardiano della cripta",
+      "image": "guardiano.png",
       "text": "Oltre la porta, una figura scheletrica avvolta in un mantello in brandelli si erge a guardia di un sarcofago dorato. Vuote orbite si accendono di una luce fredda mentre ti fissa.",
       "choices": [
         {
@@ -146,6 +151,7 @@
     {
       "id": "scontro_guardiano",
       "title": "Lo scontro col guardiano",
+      "image": "scontro_guardiano.png",
       "text": "Il guardiano leva un'arma spettrale e ti viene incontro. Non c'è più tempo per le parole: stringi i denti e ti prepari a combattere per la tua vita.",
       "encounter": {
         "npcId": "guardiano",
@@ -159,6 +165,7 @@
     {
       "id": "camera_tesoro",
       "title": "La camera del tesoro",
+      "image": "camera_tesoro.png",
       "text": "Il guardiano si sgretola in polvere. Sollevi il coperchio del sarcofago: monete d'oro, gemme e una corona dimenticata brillano alla luce della torcia. Esci dalla cripta da ricco eroe. Hai vinto!",
       "outcome": "VICTORY",
       "ending": true,
@@ -167,6 +174,7 @@
     {
       "id": "vittoria_pacifica",
       "title": "Il patto dell'amuleto",
+      "image": "vittoria_pacifica.png",
       "text": "Alla vista dell'amuleto il guardiano si inchina e si fa da parte. Senza versare una goccia di sangue, reclami il tesoro e l'antica benedizione dei suoi custodi. Hai vinto con saggezza!",
       "outcome": "VICTORY",
       "ending": true,

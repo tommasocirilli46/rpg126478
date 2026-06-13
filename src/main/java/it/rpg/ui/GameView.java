@@ -19,6 +19,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.control.Tooltip;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
@@ -41,6 +43,7 @@ final class GameView implements GameEventListener {
     private final GameRepository gameRepository;
 
     private final Label sceneTitle = new Label();
+    private final ImageView sceneImage = new ImageView();
     private final Label narrative = new Label();
     private final VBox choiceBox = new VBox(10);
     private final VBox characterPanel = new VBox(10);
@@ -60,9 +63,16 @@ final class GameView implements GameEventListener {
         sceneTitle.getStyleClass().add("scene-title");
         sceneTitle.setWrapText(true);
 
+        sceneImage.getStyleClass().add("scene-image");
+        sceneImage.setPreserveRatio(true);
+        sceneImage.setSmooth(true);
+        sceneImage.setFitHeight(220);
+
         narrative.getStyleClass().add("narrative");
         narrative.setWrapText(true);
-        ScrollPane narrativeScroll = new ScrollPane(narrative);
+        VBox narrativeContent = new VBox(14, sceneImage, narrative);
+        narrativeContent.setAlignment(Pos.TOP_CENTER);
+        ScrollPane narrativeScroll = new ScrollPane(narrativeContent);
         narrativeScroll.setFitToWidth(true);
         narrativeScroll.getStyleClass().add("narrative-scroll");
         VBox.setVgrow(narrativeScroll, Priority.ALWAYS);
@@ -152,7 +162,27 @@ final class GameView implements GameEventListener {
     private void renderScene(Scene scene) {
         sceneTitle.setText(scene.title());
         narrative.setText(scene.text());
+        renderImage(scene.image());
         rebuildChoices();
+    }
+
+    /**
+     * Loads the scene illustration from {@code /images/<name>} on the classpath.
+     * A scene without a picture, or one whose file is missing, simply shows no
+     * image: the slot collapses so it takes up no space.
+     */
+    private void renderImage(String imageName) {
+        Image image = null;
+        if (imageName != null && !imageName.isBlank()) {
+            var url = getClass().getResource("/images/" + imageName);
+            if (url != null) {
+                image = new Image(url.toExternalForm());
+            }
+        }
+        sceneImage.setImage(image);
+        boolean visible = image != null && !image.isError();
+        sceneImage.setVisible(visible);
+        sceneImage.setManaged(visible);
     }
 
     private void rebuildChoices() {

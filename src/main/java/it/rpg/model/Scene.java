@@ -17,6 +17,7 @@ public final class Scene {
     private String id;
     private String title;
     private String text;
+    private String image;
     private Outcome outcome = Outcome.NONE;
     private boolean ending = false;
     private List<Choice> choices = new ArrayList<>();
@@ -50,6 +51,15 @@ public final class Scene {
 
     public String text() {
         return text;
+    }
+
+    /**
+     * @return the file name of this scene's illustration, looked up on the
+     *         classpath under {@code /images/}, or {@code null} if the scene
+     *         has no picture.
+     */
+    public String image() {
+        return image;
     }
 
     public Outcome outcome() {
